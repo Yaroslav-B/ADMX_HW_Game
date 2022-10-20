@@ -92,7 +92,12 @@ namespace Game.ThreeInRow
             {
                 for (int columnindex = 0; columnindex < _columns; columnindex++)
                 {
-                    sb.Append(_gameFiled[columnindex][rowIndex].Value).Append(space);
+                    int? value = _gameFiled[columnindex][rowIndex].Value;
+                    sb.Append(value).Append(space);
+                    if (value is null)
+                    {
+                        sb.Append(space);
+                    }
                 }
 
                 sb.AppendLine();
