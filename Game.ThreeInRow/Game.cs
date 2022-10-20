@@ -58,6 +58,8 @@ namespace Game.ThreeInRow
                 DeleteEmptyCells();
                 AddNewEmptyCells();
                 PrintGameField();
+
+                cycle++;
             }
 
             _logger.Log("There is no match\n" +
