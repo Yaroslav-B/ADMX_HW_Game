@@ -34,8 +34,11 @@ namespace Game.ThreeInRow
 
         public void Start()
         {
+            int cycle = 1;
+
             while (true)
             {
+                _logger.Log($"\n============== Cycle - {cycle} ==============");
                 _logger.Log("Init field:");
                 PopulateEmptyCells();
                 PrintGameField();
@@ -44,7 +47,7 @@ namespace Game.ThreeInRow
 
                 if (FindMatches() == 0)
                 {
-                    return;
+                    break;
                 }
 
                 _logger.Log("Cleared matches:");
@@ -56,6 +59,9 @@ namespace Game.ThreeInRow
                 AddNewEmptyCells();
                 PrintGameField();
             }
+
+            _logger.Log("There is no match\n" +
+                        "Game over.");
         }
 
         private List<List<Cell>> BuildEmptyGameField()
