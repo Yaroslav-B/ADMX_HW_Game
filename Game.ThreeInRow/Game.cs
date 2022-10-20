@@ -50,11 +50,11 @@ namespace Game.ThreeInRow
                     break;
                 }
 
-                _logger.Log($"Cleared - {matchNumbers} matches:");
+                _logger.Log($"Found - {matchNumbers} matches:");
                 ClearMatches();
                 PrintGameField();
 
-                _logger.Log("Removed empty cells:");
+                _logger.Log("Shifted cells down:");
                 DeleteEmptyCells();
                 AddNewEmptyCells();
                 PrintGameField();
