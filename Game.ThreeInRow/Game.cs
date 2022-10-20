@@ -35,6 +35,7 @@ namespace Game.ThreeInRow
         public void Start()
         {
             int cycle = 1;
+            int matchNumbers = 0;
 
             while (true)
             {
@@ -43,12 +44,13 @@ namespace Game.ThreeInRow
                 PopulateEmptyCells();
                 PrintGameField();
 
-                if (FindMatches() == 0)
+                matchNumbers = FindMatches();
+                if (matchNumbers == 0)
                 {
                     break;
                 }
 
-                _logger.Log("Cleared matches:");
+                _logger.Log($"Cleared - {matchNumbers} matches:");
                 ClearMatches();
                 PrintGameField();
 
