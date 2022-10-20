@@ -33,12 +33,14 @@ namespace Game.ThreeInRow
         public Game() : this(9, 9, 0, 3, 3, new ConsoleLogger()) { }
 
         public void Start()
-        {          
+        {
+            _logger.Log("Init field:");
             PopulateEmptyCells();
             PrintGameField();
 
             FindMatches();
-         
+
+            _logger.Log("Cleared matches:");
             ClearMatches();
             PrintGameField();
         }
