@@ -12,18 +12,18 @@ namespace Game.ThreeInRow
         private readonly int _columns;
         private readonly int _minValue;
         private readonly int _maxValue;
-        private readonly int _matches;
+        private readonly int _minMatches;
         private readonly Ilogger _logger;
         private readonly List<List<Cell>> _gameFiled;
         private readonly List<Cell> _matchesList;
 
-        public Game(int rows, int columns, int minValue, int maxValue, int matches, Ilogger logger)
+        public Game(int rows, int columns, int minValue, int maxValue, int minMatches, Ilogger logger)
         {
             _rows = rows;
             _columns = columns;
             _minValue = minValue;
             _maxValue = maxValue;
-            _matches = matches;
+            _minMatches = minMatches;
             _logger = logger;
 
             _gameFiled = BuildEmptyGameField();
@@ -141,7 +141,7 @@ namespace Game.ThreeInRow
             void DumpAndClear()
             {
                 //dump matches
-                if (bufer.Count >= _matches)
+                if (bufer.Count >= _minMatches)
                 {
                     _matchesList.AddRange(bufer);
                 }
