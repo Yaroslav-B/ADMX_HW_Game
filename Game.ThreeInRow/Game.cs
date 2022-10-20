@@ -34,20 +34,28 @@ namespace Game.ThreeInRow
 
         public void Start()
         {
-            _logger.Log("Init field:");
-            PopulateEmptyCells();
-            PrintGameField();
+            while (true)
+            {
+                _logger.Log("Init field:");
+                PopulateEmptyCells();
+                PrintGameField();
 
-            FindMatches();
+                FindMatches();
 
-            _logger.Log("Cleared matches:");
-            ClearMatches();
-            PrintGameField();
+                if (FindMatches() == 0)
+                {
+                    return;
+                }
 
-            _logger.Log("Removed empty cells:");
-            DeleteEmptyCells();
-            AddNewEmptyCells();
-            PrintGameField();
+                _logger.Log("Cleared matches:");
+                ClearMatches();
+                PrintGameField();
+
+                _logger.Log("Removed empty cells:");
+                DeleteEmptyCells();
+                AddNewEmptyCells();
+                PrintGameField();
+            }
         }
 
         private List<List<Cell>> BuildEmptyGameField()
