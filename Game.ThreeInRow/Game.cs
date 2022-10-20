@@ -43,6 +43,11 @@ namespace Game.ThreeInRow
             _logger.Log("Cleared matches:");
             ClearMatches();
             PrintGameField();
+
+            _logger.Log("Removed empty cells:");
+            DeleteEmptyCells();
+            AddNewEmptyCells();
+            PrintGameField();
         }
 
         private List<List<Cell>> BuildEmptyGameField()
@@ -167,6 +172,26 @@ namespace Game.ThreeInRow
             foreach (var cell in _matchesList)
             {
                 cell.Value = null;
+            }
+        }
+
+        private void DeleteEmptyCells()
+        {
+            foreach (var column in _gameFiled)
+            {
+                column.RemoveAll(x => _matchesList.Contains(x));
+            }
+        }
+
+        private void AddNewEmptyCells()
+        {
+            for (int column = 0; column < _columns; column++)
+            {
+                var col = _gameFiled[column];
+                for (int row = col.Count; row < _rows; row++)
+                {
+                    col.Add(new Cell(0, 0));
+                }
             }
         }
     }
