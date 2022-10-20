@@ -17,6 +17,15 @@ namespace Game.ThreeInRow
         private readonly List<List<Cell>> _gameFiled;
         private readonly List<Cell> _matchesList;
 
+        /// <summary>
+        /// Initializes a new instance using the specified parameters.
+        /// </summary>
+        /// <param name="rows">Number of rows in a game field</param>
+        /// <param name="columns">Number of columns in a game field</param>
+        /// <param name="minValue">Minimum value allowed to be set in a cell</param>
+        /// <param name="maxValue">Maximum value allowed to be set in a cell</param>
+        /// <param name="minMatches">Minimum number of matches of values in row or column to be taken into account</param>
+        /// <param name="logger">Instance of Ilogger</param>
         public Game(int rows, int columns, int minValue, int maxValue, int minMatches, Ilogger logger)
         {
             _rows = rows;
@@ -30,6 +39,9 @@ namespace Game.ThreeInRow
             _matchesList = new List<Cell>();
         }
 
+        /// <summary>
+        /// nitializes a new instance using default parameters.
+        /// </summary>
         public Game() : this(9, 9, 0, 3, 3, new ConsoleLogger()) { }
 
         public void Start()
