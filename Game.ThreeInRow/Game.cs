@@ -15,6 +15,7 @@ namespace Game.ThreeInRow
         private readonly int _matches;
         private readonly Ilogger _logger;
         private readonly List<List<Cell>> _gameFiled;
+        private readonly List<Cell> _matchesList;
 
         public Game(int rows, int columns, int minValue, int maxValue, int matches, Ilogger logger)
         {
@@ -26,6 +27,7 @@ namespace Game.ThreeInRow
             _logger = logger;
 
             _gameFiled = BuildEmptyGameField();
+            _matchesList = new List<Cell>();
         }
 
         public Game() : this(9, 9, 0, 3, 3, new ConsoleLogger()) { }
@@ -34,6 +36,8 @@ namespace Game.ThreeInRow
         {
             PopulateEmptyCells();
             PrintGameField();
+
+            _logger.Log(FindMatches().ToString());
         }
 
         private List<List<Cell>> BuildEmptyGameField()
@@ -90,6 +94,62 @@ namespace Game.ThreeInRow
             }
 
             _logger.Log(sb.ToString());
+        }
+
+        private int FindMatches()
+        {
+            _matchesList.Clear();
+            var bufer = new List<Cell>();
+            int? tempValue = null;
+
+            //vertical checking
+            foreach (var column in _gameFiled)
+            {
+                foreach (var cell in column)
+                {
+                    CheckCell(cell);
+                }
+
+                DumpAndClear();
+                tempValue = null;
+            }
+
+
+            //horizontal check
+            for (int rowIndex = 0; rowIndex < _rows; rowIndex++)
+            {
+                foreach (var column in _gameFiled)
+                {
+                    CheckCell(column[rowIndex]);
+                }
+                DumpAndClear();
+                tempValue = null;
+            }
+
+
+            void CheckCell(Cell cell)
+            {
+                if (cell.Value != tempValue)
+                {
+                    DumpAndClear();
+                }
+
+                bufer.Add(cell);
+                tempValue = cell.Value;
+            }
+
+            void DumpAndClear()
+            {
+                //dump matches
+                if (bufer.Count >= _matches)
+                {
+                    _matchesList.AddRange(bufer);
+                }
+
+                bufer.Clear();
+            }
+
+            return _matchesList.Count;
         }
     }
 }
