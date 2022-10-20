@@ -33,11 +33,14 @@ namespace Game.ThreeInRow
         public Game() : this(9, 9, 0, 3, 3, new ConsoleLogger()) { }
 
         public void Start()
-        {
+        {          
             PopulateEmptyCells();
             PrintGameField();
 
-            _logger.Log(FindMatches().ToString());
+            FindMatches();
+         
+            ClearMatches();
+            PrintGameField();
         }
 
         private List<List<Cell>> BuildEmptyGameField()
@@ -150,6 +153,14 @@ namespace Game.ThreeInRow
             }
 
             return _matchesList.Count;
+        }
+
+        private void ClearMatches()
+        {
+            foreach (var cell in _matchesList)
+            {
+                cell.Value = null;
+            }
         }
     }
 }
