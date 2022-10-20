@@ -43,8 +43,6 @@ namespace Game.ThreeInRow
                 PopulateEmptyCells();
                 PrintGameField();
 
-                FindMatches();
-
                 if (FindMatches() == 0)
                 {
                     break;
