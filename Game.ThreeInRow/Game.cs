@@ -44,6 +44,9 @@ namespace Game.ThreeInRow
         /// </summary>
         public Game() : this(9, 9, 0, 3, 3, new ConsoleLogger()) { }
 
+        /// <summary>
+        /// Starts a cyclic processing of the game field until there are no matches
+        /// </summary>
         public void Start()
         {
             int cycle = 1;
